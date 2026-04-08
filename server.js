@@ -35,9 +35,13 @@ app.get('/test-chat.html', (req, res) => {
 // API routes
 app.use("/api", chatRoutes);
 
-// Catch-all for Vercel (404 fallback)
-app.get('*', (req, res) => {
-  res.redirect('/test-chat.html');
+// Catch-all for Vercel SPA/static (remove invalid path-to-regexp '*')
+app.use((req, res) => {
+  if (req.path === '/test-chat.html') {
+    res.sendFile('test-chat.html', { root: './' });
+  } else {
+    res.redirect('/test-chat.html');
+  }
 });
 
 const PORT = process.env.PORT || 5000;
