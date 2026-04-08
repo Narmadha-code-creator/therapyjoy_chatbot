@@ -3,23 +3,27 @@
 <head>
   <title>TherapyJoy Chatbot Test</title>
   <style>
-    body { font-family: Arial; max-width: 600px; margin: 50px auto; }
-    #chat { border: 1px solid #ccc; height: 400px; overflow-y: scroll; padding: 10px; margin-bottom: 10px; }
-    #input { width: 80%; padding: 10px; }
-    button { padding: 10px 20px; }
-    .user { color: blue; }
-    .bot { color: green; }
+    body { font-family: Arial; max-width: 600px; margin: 50px auto; background: #f5f5f5; }
+    #chat { border: 1px solid #ccc; height: 400px; overflow-y: scroll; padding: 10px; margin-bottom: 10px; background: white; border-radius: 10px; }
+    #input { width: 80%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+    button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .user { color: blue; margin-bottom: 10px; }
+    .bot { color: green; margin-bottom: 10px; }
+    h1 { color: #333; text-align: center; }
   </style>
 </head>
 <body>
-  <h1>TherapyJoy Chatbot Test (OpenAI Ready)</h1>
+  <h1>🚀 TherapyJoy AI Chatbot Demo</h1>
   <div id="chat"></div>
-  <input id="input" type="text" placeholder="Type message...">
+  <input id="input" type="text" placeholder="Ask about health, anxiety... (OpenAI powered)">
   <button onclick="sendMessage()">Send</button>
+  <p><small>Backend API: <span id="backend-url"></span></small></p>
 
   <script>
     const chatDiv = document.getElementById('chat');
     const input = document.getElementById('input');
+    const backendUrl = document.getElementById('backend-url');
+    backendUrl.textContent = window.location.origin;
 
     async function addMessage(content, isUser = false) {
       const div = document.createElement('div');
@@ -37,21 +41,25 @@
       input.value = '';
 
       try {
-        const res = await fetch('http://localhost:5000/api/chat', {
+        const res = await fetch('/api/chat', {  // Relative URL for any host
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({message})
+          body: JSON.stringify({message, userId: 'demo'})
         });
         const data = await res.json();
         addMessage(data.reply);
       } catch (e) {
-        addMessage('Error: ' + e.message);
+        addMessage('Error: ' + e.message + '. Check console/OpenAI key.');
+        console.error(e);
       }
     }
 
     input.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') sendMessage();
     });
+
+    // Welcome
+    addMessage('Hi! I\\'m TherapyJoy AI. How can I support you today?');
   </script>
 </body>
 </html>
