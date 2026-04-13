@@ -1,18 +1,18 @@
-import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export async function getAIResponse(message) {
-  const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-  });
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    console.error("🚨 MISSING GEMINI_API_KEY in .env");
+    throw new Error("Missing GEMINI_API_KEY - add to .env from aistudio.google.com");
+  }
+  const genAI = new GoogleGenerativeAI(apiKey);
+  console.log("✅ Gemini key loaded:", apiKey.slice(0,10) + "...");
 
   try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "system",
-          content: `
-You are TherapyJoy, a professional healthcare support assistant.
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    
+    const prompt = `You are TherapyJoy, a professional healthcare support assistant.
 
 You provide:
 - Emotional support
@@ -25,15 +25,16 @@ STRICT RULES:
 - Encourage consulting licensed doctors.
 - Advise emergency help if severe symptoms appear.
 - Be calm and empathetic.
-`
-        },
-        { role: "user", content: message }
-      ],
+
+User message: ${message}`;
+
+    const result = await model.generateContent(prompt, {
       temperature: 0.6,
-      max_tokens: 300
+      maxOutputTokens: 300
     });
 
-    return completion.choices[0].message.content;
+    const response = await result.response;
+    return response.text();
 
   } catch (error) {
     console.error("AI Error:", error);
