@@ -6,7 +6,8 @@ export async function getAIResponse(message) {
     console.error("🚨 MISSING GEMINI_API_KEY in .env");
     throw new Error("Missing GEMINI_API_KEY - add to .env from aistudio.google.com");
   }
-  console.log("✅ Gemini key loaded:", apiKey ? apiKey.slice(0,10) + "..." : "NONE");
+  const genAI = new GoogleGenerativeAI(apiKey);
+  console.log("✅ Gemini key loaded:", apiKey.slice(0,10) + "...");
 
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
