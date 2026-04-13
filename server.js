@@ -14,17 +14,11 @@ app.use(cors({
   origin: '*', // Demo - restrict in prod
 }));
 app.use(express.json({ limit: '10mb' }));
-app.use(express.static('.')); // Serve test-chat.html, README etc.
+app.use(express.static('.')); // Serve index.html, test-chat.html
 
-// Health check root - Vercel essential
+// Root serves chatbot - ROOT ACCESS!
 app.get("/", (req, res) => {
-  res.json({ 
-    message: "TherapyJoy AI Chatbot API Live! 🚀", 
-    version: "1.0.0",
-    testPage: "/test-chat.html",
-    endpoints: ["/api/chat POST {\"message\":\"hi\", \"userId\":\"test\"}"],
-    status: "healthy"
-  });
+  res.sendFile('index.html', { root: './' });
 });
 
 // Explicit test page

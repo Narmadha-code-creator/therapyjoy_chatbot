@@ -8,4 +8,4 @@
 - [ ] Step 5: Test server with new Gemini key in .env
 - [ ] Step 6: Mark complete
 
-**Next: Add GEMINI_API_KEY to .env (get free from https://aistudio.google.com/app/apikey), then test**
+**Next: Add GEMINI_API_KEY to .env (get free from https://.google.comaistudio/app/apikey), then test**
