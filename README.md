@@ -4,7 +4,7 @@
 TherapyJoy is a Node.js/Express backend for an AI-driven healthcare therapy platform. It integrates OpenAI for conversational AI therapy sessions, MongoDB for data persistence, and supports features like emergency checks and chat history.
 
 ## Key Features
-- **AI Chat Therapy**: OpenAI-powered conversations for mental health support
+- **AI Chat Therapy**: Google Gemini-powered conversations for mental health support
 - **Emergency Detection**: Monitors chats for crisis keywords and triggers alerts
 - **User Session Management**: Stores chat history with MongoDB
 - **RESTful APIs**: `/api/chat` for messaging, authentication ready
@@ -13,7 +13,7 @@ TherapyJoy is a Node.js/Express backend for an AI-driven healthcare therapy plat
 ```
 Node.js + Express (ES Modules)
 MongoDB + Mongoose
-OpenAI API v4
+Google Gemini AI (gemini-1.5-flash)
 CORS enabled
 dotenv for env vars
 ```
@@ -28,7 +28,7 @@ dotenv for env vars
 
 2. **Environment Variables** (`.env`):
    ```
-   OPENAI_API_KEY=sk-...
+   GEMINI_API_KEY=AIza... (get free from https://aistudio.google.com/app/apikey)
    MONGO_URI=mongodb://localhost:27017/therapyjoy
    PORT=5000
    ```
@@ -56,7 +56,7 @@ curl -X POST http://localhost:5000/api/chat \
 ```
 therapyjoy-backend/
 ├── server.js          # Entry point
-├── aiServices.js      # OpenAI integration
+├── aiServices.js      # Google Gemini AI integration
 ├── chatcontrollers.js # Chat logic
 ├── chatRoutes.js      # API routes
 ├── db.js             # MongoDB connection
