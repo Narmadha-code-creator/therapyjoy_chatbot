@@ -1,30 +1,52 @@
-# TherapyJoy Backend - AI-Powered Healthcare Chat System (Gemini AI ✅)
+# TherapyJoy - OpenAI Healthcare AI Chatbot (Immediate Cloud Responses!)
 
-## 🎉 Ready to Run - Copy your NEW key!
+## 🚀 QUICK START (2 mins)
 
-**Your new key:** `AIzaSyCqoIkzmazOVcr7qRyWNEPlJjHgR8EYuKI`
-
-**Delete .env, recreate:**
+1. **API Key** (Free tier GPT-4o-mini):
 ```
-GEMINI_API_KEY=AIzaSyCqoIkzmazOVcr7qRyWNEPlJjHgR8EYuKI
+.env → OPENAI_API_KEY=your_key_here
+```
+Get key: https://platform.openai.com/api-keys
+
+2. **DB** (Optional MongoDB):
+```
+.env → MONGODB_URI=mongodb://localhost:27017/therapyjoy
 ```
 
-**Run:**
+3. **Run**:
 ```
 npm start
 ```
-See `✅ Gemini key loaded`
 
-**Test:** http://localhost:5000/test-chat.html
+4. **Test**:
+```
+http://localhost:5000/test-chat.html
+```
 
-## Features Live
-- ✅ Gemini AI (your new free key)
-- ✅ Emergency detection 
-- ✅ Chat history (Mongo optional)
-- ✅ Beautiful test UI
-- ✅ Vercel deploy ready
+## ✨ Features
+- ⚡ **Immediate OpenAI GPT-4o-mini** responses
+- 🧠 **DB Chat History Context** (last 10 msgs/userId)
+- 🚨 **Emergency Detection** first
+- 💾 **MongoDB Logging**
+- ✅ **Safe, Empathetic** (no diagnosis)
+- 📱 **Modern UI** (index.html)
 
-**Deploy:** `vercel --prod`
+## API Usage
+```
+POST /api/chat
+{
+  "message": "I feel anxious",
+  "userId": "user123" // Optional for context
+}
+```
 
-**Done!** No more 500 errors 🚀
+## Troubleshooting
+- API key invalid? Regenerate.
+- No DB? Works without.
+- Slow? Free tier limits.
+
+**Live Demo:** http://localhost:5000/
+
+## Ollama Fallback (Old)
+See README-OLLAMA.md
 
